@@ -1,0 +1,35 @@
+.bookItem {
+  border: solid 5px inherit;
+  border-radius: 3%;
+  background-color: rgb(247 232 232);
+  margin: 20px 20px 20px 20px;
+  flex-basis: 50%;
+  box-sizing: border-box;
+  user-select: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bookItem div > button {
+  background-color: rgb(217 186 186);
+  border: solid rgb(217 186 186) 10px;
+  border-radius: 10%;
+  margin: 5px 5px 5px 5px;
+  box-shadow: 5px 1px 5px rgba(255, 255, 255, 0);
+  outline: none;
+}
+
+.bookItem .bookItem div > button:hover {
+  background-color: rgb(240, 136, 136);
+  border: solid rgb(240, 136, 136) 10px;
+}
+
+.bookLink {
+  text-decoration: none;
+  padding: 2px 2px 2px 2px;
+  margin-bottom: 10px;
+}
+
+.bookLink:hover {
+  background-color: rgb(93, 93, 255);
+  text-decoration: none;
+}

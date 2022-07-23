@@ -1,0 +1,83 @@
+.dots {
+  display: block;
+  text-align: center;
+}
+.dot {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: solid 2px rgb(247 232 232);
+  background-color: rgb(247 232 232);
+  margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 400px) {
+  .dot {
+    width: 30px;
+    height: 30px;
+  }
+  .dot > img {
+    width: 30px;
+    height: 30px;
+  }
+  .dotNum > span {
+    font-size: 15px !important;
+    font-weight: bold;
+    margin: 2px;
+    padding: 5px;
+  }
+  .dots .dot:first-child {
+    margin-right: 3px;
+  }
+
+  .dots .dot:last-child {
+    margin-left: 3px;
+  }
+}
+
+.dotNum {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: solid 2px rgb(247 232 232);
+  background-color: rgb(247 232 232);
+  margin: 5px;
+}
+
+.dot:hover {
+  border: solid 2px rgb(255, 172, 140);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dots .dot:first-child {
+  margin-right: 10px;
+}
+
+.dots .dot:last-child {
+  margin-left: 10px;
+}
+.dot > img {
+  display: inline-block;
+  margin: auto;
+  padding: 10px;
+}
+
+.dotNum > span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.listContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.mainListContainer {
+  display: block;
+  text-align: center;
+}

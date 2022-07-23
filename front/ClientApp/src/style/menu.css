@@ -1,0 +1,49 @@
+.smallScreenMenu {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 200px;
+  z-index: 999;
+  display: block;
+  background-color: rgb(247 232 232);
+  border-radius: 20px;
+  padding: 10px;
+}
+.smallScreenMenu > ul {
+  list-style: none;
+}
+
+.smallScreenMenu > ul > li {
+  background-color: rgb(247 232 232);
+  border-bottom: solid 2px rgb(247 232 232);
+}
+
+.smallScreenMenu > ul > li:hover {
+  border-bottom: solid 2px rgb(255, 109, 109);
+}
+
+.smallScreenMenu > ul > div > li > a {
+  text-decoration: none;
+  color: black;
+}
+.smallScreenMenu > ul > li > a {
+  text-decoration: none;
+  color: black;
+}
+
+.smallScreenMenu > ul > div > li {
+  background-color: rgb(247 232 232);
+  border-bottom: solid 2px rgb(247 232 232);
+}
+
+.smallScreenMenu > ul > div > li:hover {
+  border-bottom: solid 2px rgb(255, 109, 109);
+}
+
+@media (max-width: 350px) {
+  .smallScreenMenu {
+    width: 100vw;
+    right: 2px;
+    left: 2px;
+  }
+}

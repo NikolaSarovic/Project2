@@ -1,0 +1,41 @@
+.container {
+  position: fixed;
+  left: 20px;
+  top: 30px;
+  width: 100px;
+  background-color: rgb(252, 239, 239);
+  border: solid rgb(252, 239, 239) 5px;
+  margin: auto;
+  border-radius: 20px;
+  height: 95%;
+  display: block;
+}
+
+.notlogged {
+  display: none;
+}
+.container > ul {
+  list-style: none;
+  display: inline;
+}
+
+ul > li {
+  background-color: rgb(255, 241, 241);
+  padding: 10px 10px 10px 10px;
+  margin: 3px 3px 3px 3px;
+}
+
+.container ul > li:hover {
+  background-color: rgb(255, 109, 109);
+  border-radius: 20px;
+}
+
+.container ul > li > a {
+  background-color: inherit;
+}
+
+@media (max-width: 750px) {
+  .container {
+    display: none;
+  }
+}

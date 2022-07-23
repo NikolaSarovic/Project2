@@ -1,0 +1,25 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #73b9ff;
+  border-color: #1861ac;
+}
+
+body {
+  background-color: #b6ddfd;
+  user-select: none;
+  background-image: url(./images/books2.jpg);
+}
+
+body h3,
+h2 {
+  font-size: 2em !important;
+}

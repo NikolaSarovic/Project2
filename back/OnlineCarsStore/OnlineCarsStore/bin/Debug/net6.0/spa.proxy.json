@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "",
+"LaunchCommand": "",
+"WorkingDirectory": "C:\\Users\\Nikola\\Desktop\\Diplomski\\Projekat2\\back\\OnlineCarsStore\\OnlineCarsStore",
+"MaxTimeoutInSeconds": "120"
+}
+}

@@ -1,0 +1,30 @@
+.footercont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.subscribe {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 20px 20px 20px;
+  justify-content: center;
+}
+
+.hiddenSubsrcibe {
+  display: none;
+}
+.showSubscribe {
+  display: block;
+}
+
+.textcont {
+  border-top: solid rgb(255, 180, 180) 4px;
+  border-bottom: solid rgb(255, 180, 180) 4px;
+  padding: 40px;
+}
+
+.cr {
+  font: 12px sans-serif;
+}
