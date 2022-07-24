@@ -43,8 +43,12 @@ namespace OnlineCarsStore.Repository
         public async Task<CarDto> GetCarById(int carId)
         {
             var res = await _contex.Cars.Where(x => x.Id == carId)
-                     .Select(x => new CarDto(x))
-                     .FirstOrDefaultAsync();
+                .Include(x => x.Image)
+                .Include(x => x.BrandCar)
+                .Include(x => x.ModelCar)
+                .Include(x => x.User)
+                .Select(x => new CarDto(x))
+                .FirstOrDefaultAsync();
             return res; 
                     
           

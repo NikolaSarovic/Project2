@@ -28,9 +28,8 @@ namespace OnlineCarsStore.DataTransferObjects.CarDtos
             this.NumberUser = car.User.Number;
             this.EmailUser = car.User.Email;    
             this.urlImage = car.Image.Select(x=> x.URL).ToList();
-                
-
-        }
+           }
+       
 
     }
 }
