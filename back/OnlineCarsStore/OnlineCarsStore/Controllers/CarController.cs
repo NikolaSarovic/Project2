@@ -5,6 +5,7 @@ using OnlineCarsStore.DataTransferObjects;
 using OnlineCarsStore.Model;
 using System.Collections;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace OnlineCarsStore.Controllers
 {
@@ -22,9 +23,9 @@ namespace OnlineCarsStore.Controllers
         
         [Route("GetAllCars")]
         [HttpGet]
-        public async Task<ActionResult<CarDto>> GetAllCars()
+        public async Task<ActionResult<IEnumerable<CarDto>>> GetAllCars()
         {
-            IEnumerable returnList = await _repository.GetAllCars();  
+            IEnumerable returnList = await _repository.GetAllCars();
             return Ok(returnList);    
         }
        
@@ -47,5 +48,40 @@ namespace OnlineCarsStore.Controllers
                 return NotFound();
             return Ok(response);
         }
+        [Authorize]
+        [Route("CreateCar")]
+        [HttpPost]
+        public async Task<ActionResult<Car>> CreateCar([FromForm] IEnumerable<IFormFile> file,int brandId,int modelId,string color,int numberDors,string description,float price,string state)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var response = await _repository.CreateCar(new CreateCarDto(modelId,brandId,userId,color,numberDors,description,price,state,file));
+            return Ok(response);
+        }
+        
+        [Authorize]
+        [Route("CarUpdate")]
+        [HttpPost]
+        public async Task<ActionResult<Car>> UpdateCar(CarUpdate carUpdate, int carId)
+        {
+            var returnValue = await  _repository.UpdateCar(carUpdate, carId);
+            if (returnValue == null)
+                return BadRequest();
+            return Ok(returnValue);
+        }
+        
+       [Authorize]
+        [Route("GetCarByUserId")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CarDto>>> GetCarByUserId()
+        {
+            string userId= User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+                return BadRequest();
+          IEnumerable result= await _repository.GetCarByUserId(userId); 
+            return Ok(result);
+
+        }
+
+
     }
 }

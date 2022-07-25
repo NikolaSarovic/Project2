@@ -7,8 +7,12 @@ namespace OnlineCarsStore.Repository.Interfaces
     public interface ICarProfileRepository
     {
         public Task<IEnumerable<CarDto>> GetAllCars();
+        public Task<IEnumerable<CarDto>> GetCarByUserId(string userId);
         public Task<CarDto> GetCarById(int cariId);
+        public Task<Car> CreateCar(CreateCarDto carDto);
+        public Task<Car> UpdateCar(CarUpdate carUpdate,int carId);
         public Task<ResponseDto> DeleteCar(int carId);
+
 
     }
 }

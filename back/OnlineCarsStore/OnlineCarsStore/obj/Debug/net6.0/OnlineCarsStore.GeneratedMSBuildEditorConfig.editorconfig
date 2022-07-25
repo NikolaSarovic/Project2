@@ -14,3 +14,11 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Nikola/Desktop/Diplomski/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Nikola/Desktop/Diplomski/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
