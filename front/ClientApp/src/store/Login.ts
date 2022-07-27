@@ -1,8 +1,6 @@
 
 import { Action, Reducer } from 'redux';
 
-// -----------------
-// STATE - This defines the type of data maintained in the Redux store.
 
 export interface LoginState {
     username: string,
@@ -11,8 +9,8 @@ export interface LoginState {
 
 
 interface LoginData {
-    Username: string,
-    Password: string
+    username: string,
+    password: string
 }
 
 const initialState: LoginState = {
@@ -21,7 +19,7 @@ const initialState: LoginState = {
 }
 export interface ChangeUsername { type: 'LOGIN/CHANGEUSERNAME', payload: string }
 export interface ChangePassword { type: 'LOGIN/CHANGEPASSWORD', payload: string }
-export interface LoginAction { type: 'LOGIN/LOGIN', payload: LoginData }
+export interface LoginAction { type: 'LOGIN/LOGIN' }
 
 
 export type KnownAction = ChangeUsername | ChangePassword | LoginAction;
@@ -37,8 +35,18 @@ export const actionCreators = {
     changePasswordValue: (value: string) => {
         return { type: "LOGIN/CHANGEPASSWORD", payload: value }
     },
-    login: () => {
-
+    login: (loginData:LoginData) => {
+        fetch("https://localhost:7220/Authenticate/login",{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body:JSON.stringify({
+                username:loginData.username,
+                password:loginData.password})
+        })
+        .then(result => result.json())
+        .then(result => localStorage.setItem("token",result.token))
     }
 };
 
@@ -57,6 +65,8 @@ export const reducer: Reducer<LoginState> = (state: LoginState | undefined, inco
             return { ...state, username: action.payload }
         case 'LOGIN/CHANGEPASSWORD':
             return { ...state, password: action.payload }
+        case 'LOGIN/LOGIN':
+            return {...state}
         default:
             return state;
     }

@@ -12,10 +12,15 @@ function Login() {
     const onInputPasswordChange = (e: HTMLInputElement) => {
         dispatch(LoginStore.actionCreators.changePasswordValue(e.value));
     }
+    const onSubmit = () =>{
+        console.log(state)
+        dispatch(LoginStore.actionCreators.login({username:state!.username, password:state!.password}))
+    }
     return (
         <div>
             <input type="text" value={state!.username} onChange={e => onInputUsernameChange(e.target as HTMLInputElement)} />
             <input type="password" value={state!.password} onChange={e => onInputPasswordChange(e.target as HTMLInputElement)} />
+            <button onClick={(e:any) => onSubmit()}>Login</button>
         </div>
     )
 }
