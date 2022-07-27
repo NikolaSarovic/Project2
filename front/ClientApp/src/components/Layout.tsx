@@ -1,14 +1,14 @@
 import * as React from 'react';
-import '../style/pageContainerStyle.css'
-
+import { Container } from 'reactstrap';
+import NavMenu from './NavMenu';
 
 export default class Layout extends React.PureComponent<{}, { children?: React.ReactNode }> {
     public render() {
         return (
             <React.Fragment>
-                <div className='cont'>
+                <Container>
                     {this.props.children}
-                </div>
+                </Container>
             </React.Fragment>
         );
     }

@@ -4,22 +4,11 @@ a {
 }
 
 code {
-  color: #e01a76;
+  color: #E01A76;
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #73b9ff;
+  background-color: #1b6ec2;
   border-color: #1861ac;
-}
-
-body {
-  background-color: #b6ddfd;
-  user-select: none;
-  background-image: url(./images/books2.jpg);
-}
-
-body h3,
-h2 {
-  font-size: 2em !important;
 }
