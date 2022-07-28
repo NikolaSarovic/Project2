@@ -8,7 +8,7 @@ export interface LoginState {
     password: string,
     success:boolean,
     error:boolean,
-    loggedUser:User
+    loggedUser:User | null
 }
 
 
@@ -22,14 +22,7 @@ const initialState: LoginState = {
     password: '',
     error:false,
     success:false,
-    loggedUser:{
-        firstName: null,
-        lastName: null,
-        city: null,
-        number: null,
-        country: null,
-        userName: null,
-    }
+    loggedUser:null
 }
 interface LoginActionPayload{
     status:ResponseStatus,
@@ -82,7 +75,7 @@ export const actionCreators = {
             return {type:'LOGIN/LOGIN',payload:{status:ResponseStatus.Success, user:user}}
         }
         else{
-            return {type:'LOGIN/LOGIN',payload:{status:ResponseStatus.Success, user:null}}
+            return {type:'LOGIN/LOGIN',payload:{status:ResponseStatus.Error, user:null}}
         }
     },
     initUser: async () : Promise<InitUserAction> =>  {
@@ -118,7 +111,6 @@ export const reducer: Reducer<LoginState> = (state: LoginState | undefined, inco
             else(action.payload.status == ResponseStatus.Error)
                 return {...state, error:true, success:false}
         case 'LOGIN/INITUSER':
-            console.log("fdsafdsa")
             return {...state, loggedUser: action.payload}
         default:
             return state;

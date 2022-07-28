@@ -9,7 +9,7 @@ function Register() {
     const dispatch = useDispatch();
     
     const state=useSelector((state:ApplicationState)=>state.register);
-    console.log(state);
+    
     const onInputUsernmaChange=(e:HTMLInputElement)=>{
         dispatch(RegisterStore.actionCreators.changeUsernameValue(e.value));
       //  console.log(state!.username);

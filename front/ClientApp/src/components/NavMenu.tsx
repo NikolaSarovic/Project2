@@ -14,18 +14,22 @@ function NavMenu() {
         window.location.reload();
     }
     useEffect(()=>{
+        if(localStorage.getItem("token") != null){
         (async function(){
             dispatch(await LoginStore.actionCreators.initUser()) 
         })()
+    }
     },[])
     return (
         <header>
-            <div style={{display:state!.loggedUser.userName!=null ? "none" : "block"}}>
+            {console.log(state!.loggedUser)}
+            <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
             </div>
-            <div style={{display:state!.loggedUser.userName!=null ? "block" : "none"}}>
-                <h6>{`${state!.loggedUser.userName} is logged in`}</h6>
+            <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
+                
+                <h6>{` is logged in`}</h6>
                 <button onClick={()=> logOut()}>Log out</button>
             </div>
         </header> )
