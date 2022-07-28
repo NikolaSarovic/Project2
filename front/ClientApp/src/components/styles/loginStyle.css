@@ -1,0 +1,10 @@
+.loginForm{
+    max-width:300px;
+    margin:auto;
+    display:flex;
+    flex-direction: column;
+    margin-top: 100px;
+    padding:20px;
+    border: 2px solid white;
+    background-color:white;
+}

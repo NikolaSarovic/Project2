@@ -10,7 +10,6 @@ namespace OnlineCarsStore.DataTransferObjects.UserProfileDtos
         public int? Number { get; set; }
         public string Country { get; set; }
         public string UserName { get; set; }
-        public ICollection<Car> Cars { get; set; }
 
         public UserProfileDto( User model)
         {
@@ -20,8 +19,6 @@ namespace OnlineCarsStore.DataTransferObjects.UserProfileDtos
             this.City = model.City;
             this.Country = model.Country;
             this.Number = model.Number;
-            this.Cars = model.Cars;
-            this.Cars.ToList().ForEach(x => x.User = null);
          }
     }
 }
