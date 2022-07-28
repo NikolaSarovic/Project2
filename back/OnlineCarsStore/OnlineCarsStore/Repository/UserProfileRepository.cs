@@ -32,8 +32,6 @@ namespace OnlineCarsStore.Repository
         {
             var result = await _context.Users
                 .Where(x => x.Id == id)
-                .Include(x=>x.Cars)
-                .ThenInclude(x=>x.Image)
                 .Select(x=>new UserProfileDto(x))
                 .FirstOrDefaultAsync(); 
                

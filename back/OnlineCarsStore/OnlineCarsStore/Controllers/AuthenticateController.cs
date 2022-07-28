@@ -61,7 +61,7 @@ namespace OnlineCarsStore.Controllers
                 });
 
             }
-            return Unauthorized();
+            return BadRequest();
         }
 
         [HttpPost]
