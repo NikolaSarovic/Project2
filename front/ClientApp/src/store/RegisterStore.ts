@@ -1,6 +1,5 @@
 import { Action, Reducer } from 'redux';
 
-export const RegisterStor=()=>{return null}
 
 export interface RegisterState
 {
@@ -24,6 +23,7 @@ const initialState:RegisterState={
 export interface ChangeUsername {type:'REGISTER/CHANGUSERNAME', payload:string}
 export interface ChangeEmail {type:'REGISTER/CHANGEMAIL',payload:string}
 export interface ChangePassword {type:'REGISTER/CHANGEPASSWORD',payload:string}
+export interface RegisterAction {type:'REGISTER/REGISTER'}
 
 export type KnownAction = ChangeUsername | ChangeEmail| ChangePassword
 
@@ -36,6 +36,9 @@ export const actionCreators={
     },
     changePasswordValue:(value:string)=>{
         return {type:'REGISTER/CHANGEPASSWORD',payload:value}
+    },
+    register:(registerData:RegisterData)=>{
+        
     }
 }
 

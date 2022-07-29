@@ -11,8 +11,10 @@ import { NavLink } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 
 export default () => (
+    <div>
+    <NavMenu></NavMenu>
     <Layout>
-        <NavMenu></NavMenu>
+        
         <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/counter' component={Counter} />
@@ -21,4 +23,6 @@ export default () => (
             <Route path='/register' component={Register} />
         </Switch>
     </Layout>
+    </div>
+
 );
