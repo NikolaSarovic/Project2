@@ -1,13 +1,15 @@
 import React from 'react'
 import {Car} from '../store/Interfaces/HomeInterfaces'
+import ImageViewer from './ImageViewer'
 import './styles/home.css'
 interface Props{
   car : Car
 }
 function CarView(props:Props) {
+
   return (
     <div className='carView'>
-      <img src={props.car.urlImage[0]} alt="Nema"></img>
+      <ImageViewer imageUrls={props.car.urlImage}></ImageViewer>
       <div>
         <h6>{props.car.brandCar + " " + props.car.modelCar}</h6>
         <p>{props.car.description}</p>

@@ -5,21 +5,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
 import * as LoginStore from '../store/Login';
-import './styles/navMenu.css'
+import * as homeStore from '../store/homeStore';
+import './styles/navMenu.css';
+import HeaderMenu from './HeaderMenu';
+
 
 function NavMenu() {
     const state : LoginStore.LoginState = useSelector((state:ApplicationState)=>state.login!)
+    const stateSearch=useSelector((state:ApplicationState)=>state.home)
     const dispatch = useDispatch()
-    const logOut  = () :void =>{
-        localStorage.clear();
-        window.location.reload();
-    }
-    const [searchState,setSeacrhState] = useState("");
-    const onSearchChange = (e:any) =>{
-        setSeacrhState(e.value);
-    }
-    const onSubmit = () =>{
 
+    const onSearchChange = async (e:HTMLInputElement) =>{
+        console.log(homeStore.actionCreators.searchChangeAction(e.value));
+        dispatch(await homeStore.actionCreators.searchChangeAction(e.value));
+    }
+    const  onSubmit = async  () =>{
+        console.log(homeStore.actionCreators.searchCarAction(stateSearch!.searchChange));
+        dispatch(await homeStore.actionCreators.searchCarAction(stateSearch!.searchChange));
     }
     useEffect(()=>{
         if(localStorage.getItem("token") != null){
@@ -34,18 +36,16 @@ function NavMenu() {
                 <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="" />
                 <h6>Sharcar store</h6>
             </div>
-          
+            <div >
+            <TextField label="Search" margin="dense"  variant="outlined" type='text' onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
+            <Button variant="contained" onClick={(e:any) => onSubmit()} >Search</Button>
+            </div>
             <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
             </div>
             <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
-            <TextField label="Search" margin="dense"  variant="outlined" type='text' value={searchState} onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
-            <Button variant="contained" onClick={(e:any) => onSubmit()} >Login</Button>
-            </div>
-            <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
-                <h6>{` is logged in`}</h6>
-                <button onClick={()=> logOut()}>Log out</button>
+                 <HeaderMenu></HeaderMenu>
             </div>
         </header> )
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { ApplicationState } from '../store/index';
 import * as RegisterStore  from '../store/RegisterStore';
+import {Alert, TextField, Button} from '@mui/material';
+import './styles/registationStyle.css';
 
 
 function Register() {
@@ -9,10 +11,11 @@ function Register() {
     const dispatch = useDispatch();
     
     const state=useSelector((state:ApplicationState)=>state.register);
+  
     
     const onInputUsernmaChange=(e:HTMLInputElement)=>{
         dispatch(RegisterStore.actionCreators.changeUsernameValue(e.value));
-      //  console.log(state!.username);
+      
     }
     const onInputEmailChange=(e:HTMLInputElement)=>{
         dispatch(RegisterStore.actionCreators.changeEmailValue(e.value));
@@ -20,13 +23,19 @@ function Register() {
     const onInputPasswordChange=(e:HTMLInputElement)=>{
         dispatch(RegisterStore.actionCreators.changePasswordValue(e.value));
     }
+    const onSubmit=async ()=>{
+        
+        console.log("souu");
+        dispatch(await RegisterStore.actionCreators.register({username:state!.username,email:state!.email,password:state!.password}))
+    }
 
     return (
         
-        <div>{localStorage.getItem("token")}
-        <input type='text' value={state!.username} onChange={e=>onInputUsernmaChange(e.target as HTMLInputElement)}></input>
-        <input type='text' value={state!.email} onChange={e=>onInputEmailChange(e.target as HTMLInputElement)}></input>
-        <input type='text' value={state!.password} onChange={e=>onInputPasswordChange(e.target as HTMLInputElement)}></input>
+        <div className='registrationForm'>{localStorage.getItem("token")}
+        <TextField label="Username" margin="dense"  onChange={e=>onInputUsernmaChange(e.target as HTMLInputElement)}></TextField>
+        <TextField label="Email" margin="dense"   onChange={e=>onInputEmailChange(e.target as HTMLInputElement)}></TextField>
+        <TextField label="Password" margin="dense" type='password' onChange={e=>onInputPasswordChange(e.target as HTMLInputElement)} ></TextField>
+        <Button  onClick={()=>onSubmit()}>Registration</Button>
         </div>
     )
 }
