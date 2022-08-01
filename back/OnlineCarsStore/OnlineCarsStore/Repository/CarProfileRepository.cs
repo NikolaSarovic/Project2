@@ -9,7 +9,7 @@ using OnlineCarsStore.Services;
 
 namespace OnlineCarsStore.Repository
 {
-    
+
     public class CarProfileRepository : ICarProfileRepository
     {
         private readonly DatabaseContext _contex;
@@ -25,11 +25,11 @@ namespace OnlineCarsStore.Repository
         {
             var car = await _contex.Cars.Where(x => x.Id == carId).FirstAsync();
             _contex.Cars.Remove(car);
-            if(await _contex.SaveChangesAsync()>0)
+            if (await _contex.SaveChangesAsync() > 0)
                 return new ResponseDto { Status = "Success", Message = "Status car uspješno obrisan!" };
             return null;
 
-           
+
         }
 
         public async Task<Car> CreateCar(CreateCarDto dto)
@@ -72,10 +72,10 @@ namespace OnlineCarsStore.Repository
         {
             var result = await _contex.Cars
                 .Include(x => x.Image)
-                .Include(x=>x.BrandCar)
-                .Include(x=>x.ModelCar)
-                .Include(x=> x.User)
-                .Select(x=> new CarDto(x))
+                .Include(x => x.BrandCar)
+                .Include(x => x.ModelCar)
+                .Include(x => x.User)
+                .Select(x => new CarDto(x))
                 .ToListAsync();
             return result;
         }
@@ -110,7 +110,7 @@ namespace OnlineCarsStore.Repository
                 return car;
             return null;
         }
-        
+
         public async Task<IEnumerable<CarDto>> GetCarByUserId(string userId)
         {
             var user = await _contex.User.Where(x => x.Id == userId).FirstOrDefaultAsync();
@@ -122,6 +122,16 @@ namespace OnlineCarsStore.Repository
                      .Select(x => new CarDto(x))
                      .ToListAsync();
             return res;
+        }
+
+        public async Task<IEnumerable<CarDto>> SearchCar(string search)
+        {
+            var result = await this.GetAllCars();
+            if (!string.IsNullOrEmpty(search))
+                result = result.Where(x => 
+                x.ModelCar.ToLower().Contains(search.ToLower()) 
+                || x.BrandCar.ToLower().Contains(search.ToLower()));
+            return result;
         }
     }
 }

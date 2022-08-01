@@ -3,17 +3,21 @@ import { Car } from './Interfaces/HomeInterfaces';
 
 
 export interface HomeState{
-    cars: Car[]
+    cars: Car[],
+    searchChange:string 
 }
 const initialState : HomeState = {
-    cars:[]
+    cars:[],
+    searchChange:""
+    
 }
 
 export interface InitCarListAction { type: 'HOME/INITCARS', payload:Car[] }
 export interface SearchCarsAction { type: 'HOME/SEARCHCARS', payload: Car[] }
+export interface SearchChangeAction {type:'HOME/SEARCHCHANGE',payload:string}
 
 
-export type KnownAction = InitCarListAction | SearchCarsAction;
+export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -29,6 +33,19 @@ export const actionCreators = {
             body:null});
         const carResponse : Car[] = await response.json() as Car[];
         return {type:"HOME/INITCARS", payload:carResponse}
+    },
+    searchChangeAction: (value:string)=>{
+         return {type:"HOME/SEARCHCHANGE",payload:value}
+    },
+    searchCarAction: async (searchChange:string) :Promise<SearchCarsAction> =>{
+        let response=await fetch(`https://localhost:7220/Car/SearchCar?search=${searchChange}`,{
+            method:"GET",
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body:null});
+        const carReponse:Car[]=await response.json() as Car[];
+        return {type:"HOME/SEARCHCARS", payload:carReponse}
     }
 };
 
@@ -45,9 +62,13 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
         case 'HOME/INITCARS':
             const newState = JSON.parse(JSON.stringify(state))
             newState.cars = action.payload;
-            return newState
+            return newState;
+        case 'HOME/SEARCHCHANGE':
+            return {...state,searchChange:action.payload}
         case 'HOME/SEARCHCARS':
-            return { ...state, cars: action.payload }
+            const searchState=JSON.parse(JSON.stringify(state))
+            searchState.cars=action.payload;
+            return searchState;
         default:
             return state;
     }

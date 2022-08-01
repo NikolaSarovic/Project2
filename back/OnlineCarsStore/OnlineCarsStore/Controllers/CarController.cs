@@ -81,6 +81,17 @@ namespace OnlineCarsStore.Controllers
             return Ok(result);
 
         }
+        [Route("SearchCar")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CarDto>>> SearchCar(string search)
+        {
+            var result = await _repository.SearchCar(search);
+            if(result==null)
+                return BadRequest();
+            return Ok(result);
+
+        }
+
 
 
     }
