@@ -30,12 +30,20 @@ function Register() {
     }
 
     return (
-        
-        <div className='registrationForm'>{localStorage.getItem("token")}
+    
+        <div className='registrationForm'>
+            <div style={{display:state!.error!?"block":"none"}}>
+                <Alert severity="error">Error</Alert>
+            </div>
+            <div style={{display:state!.success!?"block":"none", marginBottom:"10px"}}>
+                <Alert severity="success">You have successfully logged in!</Alert>
+            </div>
+        <div>
         <TextField label="Username" margin="dense"  onChange={e=>onInputUsernmaChange(e.target as HTMLInputElement)}></TextField>
         <TextField label="Email" margin="dense"   onChange={e=>onInputEmailChange(e.target as HTMLInputElement)}></TextField>
         <TextField label="Password" margin="dense" type='password' onChange={e=>onInputPasswordChange(e.target as HTMLInputElement)} ></TextField>
         <Button  onClick={()=>onSubmit()}>Registration</Button>
+        </div>
         </div>
     )
 }

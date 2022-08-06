@@ -97,7 +97,7 @@ export const reducer: Reducer<LoginState> = (state: LoginState | undefined, inco
     if (state === undefined) {
         return initialState;
     }
-    console.log(incomingAction)
+  
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case 'LOGIN/CHANGEUSERNAME':

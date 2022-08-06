@@ -9,6 +9,7 @@ import Register from './components/Register';
 import './custom.css'
 import { NavLink } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
+import Profile from './components/Profile';
 
 export default () => (
     <div>
@@ -21,6 +22,7 @@ export default () => (
             <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
+            <Route path='/profile' component={Profile}/>
         </Switch>
     </Layout>
     </div>

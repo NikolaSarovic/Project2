@@ -27,13 +27,16 @@ function NavMenu() {
         if(localStorage.getItem("token") != null){
         (async function(){
             dispatch(await LoginStore.actionCreators.initUser()) 
+            
         })()
     }
     },[])
     return (
         <header className='header'>
             <div className="logo">
+                <Link to='/'>
                 <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="" />
+                </Link>
                 <h6>Sharcar store</h6>
             </div>
             <div >
@@ -45,7 +48,9 @@ function NavMenu() {
                 <Link to="/register">Register</Link>
             </div>
             <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
-                 <HeaderMenu></HeaderMenu>
+                 <HeaderMenu/>
+                
+               
             </div>
         </header> )
 }

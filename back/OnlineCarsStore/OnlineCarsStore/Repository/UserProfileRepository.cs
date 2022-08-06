@@ -46,9 +46,11 @@ namespace OnlineCarsStore.Repository
             userToUpdate.LastName = userProfile.LastName;
             userToUpdate.City = userProfile.City;
             userToUpdate.Number = userProfile.Number;
-            userToUpdate.Email=userProfile.Email;
             userToUpdate.Country = userProfile.Country;
-            if(await _context.SaveChangesAsync()>0)
+            userToUpdate.UserName = userProfile.Username;
+            userToUpdate.Email = userProfile.Email;
+
+            if (await _context.SaveChangesAsync()>0)
             return userProfile;
             return null;
         }

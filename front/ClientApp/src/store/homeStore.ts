@@ -56,7 +56,7 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
     if (state === undefined) {
         return initialState;
     }
-    console.log(state)
+   
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case 'HOME/INITCARS':

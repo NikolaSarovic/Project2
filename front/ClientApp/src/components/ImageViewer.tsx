@@ -5,6 +5,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import * as ImageStore from '../store/ImageStore';
+import { ApplicationState } from '../store/index';
+import { useSelector,useDispatch } from 'react-redux';
 
 
 
@@ -18,6 +21,8 @@ enum ChangeDirection{
 }
 
 function ImageViewer(props:Props ) {
+     const state=useSelector((state:ApplicationState)=>state.image);
+     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
   
     const handleClickOpen = () => {
@@ -59,6 +64,7 @@ function ImageViewer(props:Props ) {
                 <span>{`${currentImage+1} / ${props.imageUrls.length}`}</span>
                 <button onClick={() => changeImage(ChangeDirection.prev)}>{"<"}</button>
                 <button onClick={() => changeImage(ChangeDirection.next)}>{">"}</button>
+               
             </div>
           </DialogContent>
           <DialogActions>
