@@ -5,4 +5,5 @@ export interface User{
   number: number | null,
   country: string | null,
   userName: string | null,
+  email:string|null
 }
