@@ -4,11 +4,13 @@ import { Car } from './Interfaces/HomeInterfaces';
 
 export interface HomeState{
     cars: Car[],
-    searchChange:string 
+    searchChange:string,
+    btnSearch:boolean
 }
 const initialState : HomeState = {
     cars:[],
-    searchChange:""
+    searchChange:"",
+    btnSearch:true
     
 }
 
@@ -64,6 +66,20 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
             newState.cars = action.payload;
             return newState;
         case 'HOME/SEARCHCHANGE':
+            state.searchChange=action.payload
+            if(state.searchChange=="")
+            {
+               
+               state.btnSearch=true;
+               console.log(state.btnSearch)
+               console.log(state.searchChange.length)
+            }
+            else
+            {
+             state.btnSearch=false;
+             console.log(state.btnSearch)
+               console.log(state.searchChange.length)
+            }
             return {...state,searchChange:action.payload}
         case 'HOME/SEARCHCARS':
             const searchState=JSON.parse(JSON.stringify(state))

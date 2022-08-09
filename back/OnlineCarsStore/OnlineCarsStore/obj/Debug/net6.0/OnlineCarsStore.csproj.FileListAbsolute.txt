@@ -276,3 +276,5 @@ C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore
 C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\obj\Debug\net6.0\OnlineCarsStore.RazorAssemblyInfo.cache
+C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\obj\Debug\net6.0\OnlineCarsStore.RazorAssemblyInfo.cs

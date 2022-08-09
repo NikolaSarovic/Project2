@@ -14,15 +14,21 @@ function NavMenu() {
     const state : LoginStore.LoginState = useSelector((state:ApplicationState)=>state.login!)
     const stateSearch=useSelector((state:ApplicationState)=>state.home)
     const dispatch = useDispatch()
+    
 
-    const onSearchChange = async (e:HTMLInputElement) =>{
+    const onSearchChange = (e:HTMLInputElement) =>{
         console.log(homeStore.actionCreators.searchChangeAction(e.value));
-        dispatch(await homeStore.actionCreators.searchChangeAction(e.value));
+        dispatch( homeStore.actionCreators.searchChangeAction(e.value));
     }
     const  onSubmit = async  () =>{
-        console.log(homeStore.actionCreators.searchCarAction(stateSearch!.searchChange));
+        console.log((stateSearch!.searchChange));
+        
         dispatch(await homeStore.actionCreators.searchCarAction(stateSearch!.searchChange));
     }
+    const init=async ()=>{
+         dispatch(await homeStore.actionCreators.initCarAction())  
+         window.location.reload();   
+   }
     useEffect(()=>{
         if(localStorage.getItem("token") != null){
         (async function(){
@@ -34,14 +40,14 @@ function NavMenu() {
     return (
         <header className='header'>
             <div className="logo">
-                <Link to='/'>
+                <Link to='/' onClick={()=>init()}>
                 <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="" />
                 </Link>
                 <h6>Sharcar store</h6>
             </div>
             <div >
             <TextField label="Search" margin="dense"  variant="outlined" type='text' onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
-            <Button variant="contained" onClick={(e:any) => onSubmit()} >Search</Button>
+            <Button variant="contained" disabled={stateSearch!.btnSearch} onClick={(e:any) => onSubmit()} >Search</Button>
             </div>
             <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
                 <Link to="/login">Login</Link>

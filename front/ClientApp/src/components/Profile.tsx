@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
+import { Alert } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,35 +10,37 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useSelector,useDispatch } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as LoginStore from '../store/Login';
-import * as ProfileStore from '../store/ProfileStore';
+
 import './styles/profile.css';
 
 
 
 export default  function Profile() {
     const state : LoginStore.LoginState = useSelector((state:ApplicationState)=>state.login!);
-    const stateProfile=useSelector((stateProfile:ApplicationState)=>stateProfile.profile);
-    const statea=useSelector((state:ApplicationState)=>state);
+   
+  
    const dispatch = useDispatch();
    const handleClickOpen=()=>{
-        dispatch(ProfileStore.actionCreators.changeButtonOpen(true))
+        dispatch(LoginStore.actionCreators.changeButtonOpen(true))
    }
    const handleClose=()=>{
-      dispatch(ProfileStore.actionCreators.changeButtonOpen(false))
+      dispatch(LoginStore.actionCreators.changeButtonOpen(false))
    }
    const handleValueChange=(e:any)=>{
     const fieldName: string = e.target.name;
     const fieldVal: string = e.target.value;
-    dispatch(ProfileStore.actionCreators.changeValue(fieldName,fieldVal))
+    dispatch(LoginStore.actionCreators.changeValue(fieldName,fieldVal))
    }
    const onSubmit=async ()=>{
-     dispatch(await ProfileStore.actionCreators.confirmFom())
+     dispatch(await LoginStore.actionCreators.confirmForm())
    };
+   
    useEffect(()=>{
     
     if(localStorage.getItem("token") != null){
     (async function(){
         dispatch(await LoginStore.actionCreators.initUser()) 
+    
     })()
 }
 },[])
@@ -46,7 +49,7 @@ export default  function Profile() {
     <div className='profileForm'>
           <img src={`${process.env.PUBLIC_URL}/user.png`} alt="profile" />
           <div className='profileData'>
-          <h3>Username: {state && state.loggedUser && state.loggedUser.userName}</h3>
+          <h3>Username: {state && state.loggedUser && state.loggedUser!.userName}</h3>
           <h3>First name:{state && state.loggedUser && state!.loggedUser!.firstName}</h3>
           <h3>Last name:{state && state.loggedUser && state!.loggedUser!.lastName}</h3>
           <h3>City:{state && state.loggedUser && state!.loggedUser!.city}</h3>
@@ -57,12 +60,18 @@ export default  function Profile() {
           <Button variant="outlined" onClick={handleClickOpen}>
             Update
            </Button>
-           <Dialog open={stateProfile!.buttonOpen}>
+           <Dialog open={state!.buttonOpen}>
         <DialogTitle>Confirm</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter the correct data to modify your user account
           </DialogContentText>
+          <div style={{display:state!.error!?"block":"none"}}>
+                <Alert severity="error">Error</Alert>
+            </div>
+            <div style={{display:state!.success!?"block":"none", marginBottom:"10px"}}>
+                <Alert severity="success">You have updated your profile!</Alert> 
+                </div>
           <TextField
             autoFocus
             margin="dense"
@@ -71,7 +80,7 @@ export default  function Profile() {
             type="text"
             fullWidth
             variant="standard"
-            defaultValue={state && state.loggedUser && state.loggedUser.userName}
+            defaultValue={state && state.loggedUser && state.loggedUser.userName }
             onChange={(e) => handleValueChange(e)}
           />
           <TextField

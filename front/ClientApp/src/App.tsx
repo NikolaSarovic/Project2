@@ -10,6 +10,7 @@ import './custom.css'
 import { NavLink } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 import Profile from './components/Profile';
+import ChangePassword from './components/ChangePassword ';
 
 export default () => (
     <div>
@@ -23,6 +24,7 @@ export default () => (
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/profile' component={Profile}/>
+            <Route path='/changepassword' component={ChangePassword}/>
         </Switch>
     </Layout>
     </div>

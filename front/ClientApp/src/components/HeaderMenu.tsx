@@ -22,10 +22,11 @@ export default function HeaderMenu(){
       {(popupState) => (
         <React.Fragment>
           <Button endIcon={<AccountCircleOutlinedIcon/>} variant="contained" {...bindTrigger(popupState)}>
-              {`Profile ${state!.username}`}
+              {`Profile ${state && state.loggedUser && state.loggedUser.userName }`}
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={popupState.close}><Link to="/profile">Profile</Link></MenuItem>
+            <MenuItem onClick={popupState.close}><Link to="/changepassword">Change password</Link></MenuItem>
             <MenuItem onClick={popupState.close}><Link to="/login">Create post</Link></MenuItem>
             <MenuItem onClick={popupState.close}><Link to="/login">Manage posts</Link></MenuItem>
             <MenuItem onClick={ () =>{logOut(); } }><Link to="/">Logout</Link></MenuItem>
