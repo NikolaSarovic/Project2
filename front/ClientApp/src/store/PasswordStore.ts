@@ -98,7 +98,7 @@ export const reducer:Reducer<PasswordStore>=(state: PasswordStore|undefined, inc
             return {...state,error:action.payload};
         case "PASSWORD/UPDATE":
                 console.log(action.payload)
-            return {...state,submit:action.payload,newPassword:"",oldPassword:"",repeatPassword:""}
+            return {...state,submit:action.payload}
         
         default:
             return state;

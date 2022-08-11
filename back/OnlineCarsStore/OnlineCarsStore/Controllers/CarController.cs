@@ -51,10 +51,10 @@ namespace OnlineCarsStore.Controllers
         [Authorize]
         [Route("CreateCar")]
         [HttpPost]
-        public async Task<ActionResult<Car>> CreateCar([FromForm] IEnumerable<IFormFile> file,int brandId,int modelId,string color,int numberDors,string description,float price,string state)
+        public async Task<ActionResult<Car>> CreateCar([FromForm] IEnumerable<IFormFile> file,int modelId,string color,int numberDors,string description,float price,string state)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var response = await _repository.CreateCar(new CreateCarDto(modelId,brandId,userId,color,numberDors,description,price,state,file));
+            var response = await _repository.CreateCar(new CreateCarDto(modelId,userId,color,numberDors,description,price,state,file));
             return Ok(response);
         }
         

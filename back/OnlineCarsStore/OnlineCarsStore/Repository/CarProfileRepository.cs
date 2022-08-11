@@ -49,7 +49,7 @@ namespace OnlineCarsStore.Repository
             }
             var user = await _contex.User.Where(x => x.Id == dto.userId).FirstAsync();
             var model = await _contex.ModelCars.Where(x => x.Id == dto.ModelCarId).FirstAsync();
-            var brand = await _contex.BrandCars.Where(x => x.Id == dto.BrandCarId).FirstAsync();
+            var brand = await _contex.BrandCars.Where(x => x.Id == model.BrandId).FirstAsync();
             var newCar = new Car
             {
                 BrandCar = brand,
