@@ -3,7 +3,7 @@ namespace OnlineCarsStore.DataTransferObjects.CarDtos
 {
     public class CarUpdate
     {
-       public int BrendCar { get; set; }
+   
        public int ModelCar { get; set; }    
        public string? Description { get; set; }
         public string? Color { get; set; }

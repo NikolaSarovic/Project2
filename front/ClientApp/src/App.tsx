@@ -12,13 +12,14 @@ import NavMenu from './components/NavMenu';
 import Profile from './components/Profile';
 import ChangePassword from './components/ChangePassword ';
 import CreateCar from './components/CreateCar';
+import CarManage from './components/CarManage';
+import Footer from './components/Footer';
 
 export default () => (
     <div>
     <NavMenu></NavMenu>
     <Layout>
-        
-        <Switch>
+          <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/counter' component={Counter} />
             <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
@@ -27,8 +28,10 @@ export default () => (
             <Route path='/profile' component={Profile}/>
             <Route path='/changepassword' component={ChangePassword}/>
             <Route path='/createcar' component={CreateCar}/>
+            <Route path='/carmanage' component={CarManage}/>
         </Switch>
     </Layout>
+    <Footer></Footer>
     </div>
 
 );

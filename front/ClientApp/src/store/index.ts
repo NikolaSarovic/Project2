@@ -7,6 +7,7 @@ import * as ImageStore from './ImageStore';
 import * as PasswordStore from './PasswordStore';
 import * as CreateCarStore from './CreateCarStore'
 
+
 // The top-level state object
 export interface ApplicationState {
     counter: Counter.CounterState | undefined;
@@ -17,6 +18,7 @@ export interface ApplicationState {
     image:ImageStore.ImageStore | undefined;
     password:PasswordStore.PasswordStore | undefined;
     car:CreateCarStore.CreateCarStore | undefined;
+
   
 }
 
@@ -31,7 +33,8 @@ export const reducers = {
     home: HomeStore.reducer,
     image:ImageStore.reducer,
     password:PasswordStore.reducer,
-    car:CreateCarStore.reducer
+    car:CreateCarStore.reducer,
+  
   
 };
 
