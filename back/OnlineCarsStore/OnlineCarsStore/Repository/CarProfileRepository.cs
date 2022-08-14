@@ -49,7 +49,7 @@ namespace OnlineCarsStore.Repository
             }
             var user = await _contex.User.Where(x => x.Id == dto.userId).FirstAsync();
             var model = await _contex.ModelCars.Where(x => x.Id == dto.ModelCarId).FirstAsync();
-            var brand = await _contex.BrandCars.Where(x => x.Id == dto.BrandCarId).FirstAsync();
+            var brand = await _contex.BrandCars.Where(x => x.Id == model.BrandId).FirstAsync();
             var newCar = new Car
             {
                 BrandCar = brand,
@@ -99,8 +99,8 @@ namespace OnlineCarsStore.Repository
             Car car = await _contex.Cars.Where(x => x.Id == carId).FirstOrDefaultAsync();
             if (car == null)
                 return null;
-            car.BrandCar = await _contex.BrandCars.Where(x => x.Id == carUpdate.BrendCar).FirstOrDefaultAsync();
             car.ModelCar = await _contex.ModelCars.Where(x => x.Id == carUpdate.ModelCar).FirstOrDefaultAsync();
+            car.BrandCar = await _contex.BrandCars.Where(x => x.Id == car.ModelCar.BrandId).FirstOrDefaultAsync();
             car.Description = carUpdate.Description;
             car.Color = carUpdate.Color;
             car.Price = carUpdate.Price;

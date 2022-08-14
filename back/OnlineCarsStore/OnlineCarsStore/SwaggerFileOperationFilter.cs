@@ -16,7 +16,7 @@ namespace OnlineBookstore
             if (operation.RequestBody == null || !operation.RequestBody.Content.Any(x => x.Key.Equals(fileUploadMime, StringComparison.InvariantCultureIgnoreCase)))
                 return;
 
-            var fileParams = context.MethodInfo.GetParameters().Where(p => p.ParameterType == typeof(IEnumerable<IFormFile>));
+            var fileParams = context.MethodInfo.GetParameters().Where(p => p.ParameterType == typeof(IFormFile[]));
             operation.RequestBody.Content[fileUploadMime].Schema.Properties =
                 fileParams.ToDictionary(k => k.Name, v => new OpenApiSchema()
                 {

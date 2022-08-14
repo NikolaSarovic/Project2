@@ -1,4 +1,5 @@
-import { Action, Reducer } from 'redux';
+import { Dispatch } from "react";
+import { Action, Reducer } from "redux";
 import { Car } from './Interfaces/HomeInterfaces';
 
 
@@ -10,16 +11,18 @@ export interface HomeState{
 const initialState : HomeState = {
     cars:[],
     searchChange:"",
-    btnSearch:true
-    
+    btnSearch:true,
+       
 }
+
 
 export interface InitCarListAction { type: 'HOME/INITCARS', payload:Car[] }
 export interface SearchCarsAction { type: 'HOME/SEARCHCARS', payload: Car[] }
 export interface SearchChangeAction {type:'HOME/SEARCHCHANGE',payload:string}
+export interface InitCarByUserIdAction {type:'HOME/INITCARUSERID',payload:Car[]}
 
 
-export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAction;
+export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAction | InitCarByUserIdAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -48,6 +51,21 @@ export const actionCreators = {
             body:null});
         const carReponse:Car[]=await response.json() as Car[];
         return {type:"HOME/SEARCHCARS", payload:carReponse}
+    },
+    initCarUserIdAction: async ():Promise<InitCarByUserIdAction>=>{
+        const token=localStorage.getItem('token');
+        let response=await fetch("https://localhost:7220/Car/GetCarByUserId",{
+            method:"GET",
+            headers:{
+                'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization': 'Bearer ' + token
+            },
+            body:null
+
+        });      
+        let carResponse:Car[]=await response.json() as Car[];
+      return {type:'HOME/INITCARUSERID',payload:carResponse}
     }
 };
 
@@ -85,6 +103,11 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
             const searchState=JSON.parse(JSON.stringify(state))
             searchState.cars=action.payload;
             return searchState;
+        case 'HOME/INITCARUSERID':
+            console.log(action.payload)
+            const newStateId = JSON.parse(JSON.stringify(state))      
+            newStateId.cars = action.payload;
+            return newStateId;
         default:
             return state;
     }

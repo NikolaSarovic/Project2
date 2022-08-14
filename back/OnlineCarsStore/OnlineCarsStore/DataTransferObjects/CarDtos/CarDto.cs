@@ -3,6 +3,7 @@ namespace OnlineCarsStore.DataTransferObjects.CarDtos
 {
     public class CarDto
     {
+        public int Id { get; set; }
         public string ModelCar { get; set; }
         public string? BrandCar { get; set; }
         public string? Description { get; set; }
@@ -17,6 +18,7 @@ namespace OnlineCarsStore.DataTransferObjects.CarDtos
 
         public CarDto(Car car)
         {
+            this.Id = car.Id;
             this.BrandCar = car.BrandCar.Name;
             this.ModelCar = car.ModelCar.Name;
             this.Description = car.Description;

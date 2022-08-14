@@ -5,6 +5,8 @@ import * as RegisterStore from './RegisterStore';
 import * as HomeStore from './homeStore';
 import * as ImageStore from './ImageStore';
 import * as PasswordStore from './PasswordStore';
+import * as CreateCarStore from './CreateCarStore'
+
 
 // The top-level state object
 export interface ApplicationState {
@@ -15,6 +17,8 @@ export interface ApplicationState {
     home:HomeStore.HomeState | undefined;
     image:ImageStore.ImageStore | undefined;
     password:PasswordStore.PasswordStore | undefined;
+    car:CreateCarStore.CreateCarStore | undefined;
+
   
 }
 
@@ -28,7 +32,9 @@ export const reducers = {
     register:RegisterStore.reducer,
     home: HomeStore.reducer,
     image:ImageStore.reducer,
-    password:PasswordStore.reducer
+    password:PasswordStore.reducer,
+    car:CreateCarStore.reducer,
+  
   
 };
 
