@@ -5,7 +5,7 @@ using OnlineCarsStore.Databasecontext;
 using Microsoft.EntityFrameworkCore;
 using OnlineCarsStore.DataTransferObjects;
 using OnlineCarsStore.Services;
-
+using OnlineCarsStore.Helpers;
 
 namespace OnlineCarsStore.Repository
 {
@@ -132,6 +132,19 @@ namespace OnlineCarsStore.Repository
                 x.ModelCar.ToLower().Contains(search.ToLower()) 
                 || x.BrandCar.ToLower().Contains(search.ToLower()));
             return result;
+        }
+
+        public async Task<PaginatedDataDto<CarDto>> GetPaginatedList(int currentPage)
+        {
+            return PaginatedList<CarDto>.ApplyPagination(
+                _contex.Cars
+                .Include(x => x.Image)
+                .Include(x => x.BrandCar)
+                .Include(x => x.ModelCar)
+                .Include(x => x.User)
+                .Select(x => new CarDto(x))
+                .AsQueryable(), currentPage, 5);
+
         }
     }
 }

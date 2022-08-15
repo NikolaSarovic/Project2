@@ -28,7 +28,13 @@ namespace OnlineCarsStore.Controllers
             IEnumerable returnList = await _repository.GetAllCars();
             return Ok(returnList);    
         }
-       
+        [Route("GetPaginatedCar")]
+        [HttpGet]
+        public async Task<ActionResult<PaginatedDataDto<CarDto>>> GetPaginatedCar(int current)
+        {
+            var returnList = await _repository.GetPaginatedList(current);
+            return Ok(returnList);
+        }
         [Authorize]
         [Route("DeleteCar")]
         [HttpDelete]

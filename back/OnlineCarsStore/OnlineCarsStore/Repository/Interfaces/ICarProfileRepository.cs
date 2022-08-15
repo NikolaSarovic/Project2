@@ -6,6 +6,7 @@ namespace OnlineCarsStore.Repository.Interfaces
 {
     public interface ICarProfileRepository
     {
+        public Task<PaginatedDataDto<CarDto>> GetPaginatedList(int currentPage);
         public Task<IEnumerable<CarDto>> GetAllCars();
         public Task<IEnumerable<CarDto>> GetCarByUserId(string userId);
         public Task<CarDto> GetCarById(int cariId);

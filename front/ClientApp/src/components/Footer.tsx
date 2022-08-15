@@ -4,7 +4,9 @@ import './styles/footer.css';
 function Footer() {
   return (
     <div className='footerCss'>
-        Footer
+        <div className='name'>
+          By Nikola Sarovic
+        </div>
     </div>
   )
 }

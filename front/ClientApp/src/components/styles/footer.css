@@ -1,4 +1,14 @@
 .footerCss {
-    background-color: rgb(0 57 255 / 28%);
-    height: auto;
+    background-color: rgb(175 193 217);
+    height: 30px;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    margin-top: 10px;
+   
+}
+.name {
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
 }

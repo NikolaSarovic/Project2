@@ -5,39 +5,55 @@ import { Car } from './Interfaces/HomeInterfaces';
 
 export interface HomeState{
     cars: Car[],
+    currentPage:number,
+    numberOfPages:number,
     searchChange:string,
     btnSearch:boolean
 }
 const initialState : HomeState = {
     cars:[],
+    currentPage:1,
+    numberOfPages:1,
     searchChange:"",
     btnSearch:true,
        
 }
+interface CarPagination{
+    cars:Car[],
+    numberOfPages:number
 
+}
 
-export interface InitCarListAction { type: 'HOME/INITCARS', payload:Car[] }
+export interface InitCarListAction { type: 'HOME/INITCARS', payload:CarPagination }
 export interface SearchCarsAction { type: 'HOME/SEARCHCARS', payload: Car[] }
 export interface SearchChangeAction {type:'HOME/SEARCHCHANGE',payload:string}
 export interface InitCarByUserIdAction {type:'HOME/INITCARUSERID',payload:Car[]}
+export interface ChangePage {type:'HOME/CHANGEPAGE',payload:number}
 
-
-export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAction | InitCarByUserIdAction;
+export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAction | InitCarByUserIdAction | ChangePage;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    initCarAction: async () :Promise<InitCarListAction> => {
-        let response = await fetch("https://localhost:7220/Car/GetAllCars",{
+    initCarAction: async ()  => async (dispatch:Dispatch<any>, getState:Function) => {
+        const currentPage = getState().home.currentPage;
+        let response = await fetch(`https://localhost:7220/Car/GetPaginatedCar?current=${currentPage}`,{
             method:"GET",
             headers: {
                 'Content-Type': 'application/json',
             },
             body:null});
-        const carResponse : Car[] = await response.json() as Car[];
-        return {type:"HOME/INITCARS", payload:carResponse}
+            
+        const carResponse = await response.json();
+        console.log(carResponse)
+        dispatch({type:"HOME/INITCARS", payload:{cars:carResponse.items, numberOfPages:carResponse.pageNumber}})
+    },
+    changePage: async (increment:number)  => async (dispatch:Dispatch<any>, getState:Function) => {
+        const currentPage = getState().home.currentPage;
+        const newPage = currentPage + increment;
+        dispatch({type:"HOME/CHANGEPAGE",payload:newPage})
     },
     searchChangeAction: (value:string)=>{
          return {type:"HOME/SEARCHCHANGE",payload:value}
@@ -81,7 +97,8 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
     switch (action.type) {
         case 'HOME/INITCARS':
             const newState = JSON.parse(JSON.stringify(state))
-            newState.cars = action.payload;
+            newState.cars = action.payload.cars;
+            newState.numberOfPages = action.payload.numberOfPages;
             return newState;
         case 'HOME/SEARCHCHANGE':
             state.searchChange=action.payload
@@ -108,6 +125,8 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
             const newStateId = JSON.parse(JSON.stringify(state))      
             newStateId.cars = action.payload;
             return newStateId;
+        case 'HOME/CHANGEPAGE':
+            return {...state, currentPage:action.payload}
         default:
             return state;
     }
