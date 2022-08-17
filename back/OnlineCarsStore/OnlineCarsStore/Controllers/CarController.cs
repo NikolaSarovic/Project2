@@ -32,6 +32,7 @@ namespace OnlineCarsStore.Controllers
         [HttpGet]
         public async Task<ActionResult<PaginatedDataDto<CarDto>>> GetPaginatedCar(int current, string? searchTerm)
         {
+            int pom = 0;
             var returnList = new PaginatedDataDto<CarDto>(null,0,false,false,0);
             if (string.IsNullOrEmpty(searchTerm))
                 returnList = await _repository.GetPaginatedList(current);
