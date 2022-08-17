@@ -30,9 +30,15 @@ namespace OnlineCarsStore.Controllers
         }
         [Route("GetPaginatedCar")]
         [HttpGet]
-        public async Task<ActionResult<PaginatedDataDto<CarDto>>> GetPaginatedCar(int current)
+        public async Task<ActionResult<PaginatedDataDto<CarDto>>> GetPaginatedCar(int current, string? searchTerm)
         {
-            var returnList = await _repository.GetPaginatedList(current);
+            var returnList = new PaginatedDataDto<CarDto>(null,0,false,false,0);
+            if (string.IsNullOrEmpty(searchTerm))
+                returnList = await _repository.GetPaginatedList(current);
+            else
+                returnList = await _repository.SearchCar(searchTerm, current);
+           
+                
             return Ok(returnList);
         }
         [Authorize]
@@ -89,9 +95,9 @@ namespace OnlineCarsStore.Controllers
         }
         [Route("SearchCar")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CarDto>>> SearchCar(string search)
+        public async Task<ActionResult<PaginatedDataDto<CarDto>>> SearchCar(string search,int currentPage)
         {
-            var result = await _repository.SearchCar(search);
+            var result = await _repository.SearchCar(search,currentPage);
             if(result==null)
                 return BadRequest();
             return Ok(result);

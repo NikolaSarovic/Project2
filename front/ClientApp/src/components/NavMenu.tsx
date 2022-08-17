@@ -20,10 +20,10 @@ function NavMenu() {
         console.log(homeStore.actionCreators.searchChangeAction(e.value));
         dispatch( homeStore.actionCreators.searchChangeAction(e.value));
     }
-    const  onSubmit = async  () =>{
+    const  onSubmit =async () =>{
         console.log((stateSearch!.searchChange));
         
-        dispatch(await homeStore.actionCreators.searchCarAction(stateSearch!.searchChange));
+        dispatch(await homeStore.actionCreators.initCarAction());
     }
     const init=async ()=>{
          dispatch(await homeStore.actionCreators.initCarAction())  
@@ -46,8 +46,8 @@ function NavMenu() {
                 <h6>Sharcar store</h6>
             </div>
             <div >
-            <TextField label="Search" margin="dense"  variant="outlined" type='text' onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
-            <Button variant="contained" disabled={stateSearch!.btnSearch} onClick={(e:any) => onSubmit()} >Search</Button>
+            <TextField label="Search" margin="dense"  variant="outlined" type='text' value={stateSearch!.searchChange} onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
+            <Button variant="contained"  disabled={stateSearch!.btnSearch}  onClick={(e:any) => onSubmit()} >Search</Button>
             </div>
             <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
                 <Link to="/login">Login</Link>

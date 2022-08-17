@@ -11,6 +11,7 @@ export default function CarManage() {
 
     React.useEffect(()=>{
         (async function(){
+          dispatch(HomeStore.actionCreators.searchChangeAction(""));
           dispatch(await HomeStore.actionCreators.initCarUserIdAction());
     
         })()

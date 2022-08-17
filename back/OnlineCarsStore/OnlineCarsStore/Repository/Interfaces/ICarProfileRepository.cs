@@ -13,7 +13,7 @@ namespace OnlineCarsStore.Repository.Interfaces
         public Task<Car> CreateCar(CreateCarDto carDto);
         public Task<Car> UpdateCar(CarUpdate carUpdate,int carId);
         public Task<ResponseDto> DeleteCar(int carId);
-        public Task<IEnumerable<CarDto>> SearchCar(string search);
+        public Task<PaginatedDataDto<CarDto>> SearchCar(string search, int currentPage);
 
 
     }

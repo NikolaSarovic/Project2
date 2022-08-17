@@ -8,7 +8,7 @@ export interface HomeState{
     currentPage:number,
     numberOfPages:number,
     searchChange:string,
-    btnSearch:boolean
+    btnSearch:boolean,
 }
 const initialState : HomeState = {
     cars:[],
@@ -37,9 +37,11 @@ export type KnownAction = InitCarListAction | SearchCarsAction | SearchChangeAct
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    initCarAction: async ()  => async (dispatch:Dispatch<any>, getState:Function) => {
+    initCarAction: async (userPage:boolean=false)  => async (dispatch:Dispatch<any>, getState:Function) => {
+        console.log(`USERPAGEEEE${userPage}`)
         const currentPage = getState().home.currentPage;
-        let response = await fetch(`https://localhost:7220/Car/GetPaginatedCar?current=${currentPage}`,{
+        const searchTerm = getState().home.searchChange;
+        let response = await fetch(`https://localhost:7220/Car/GetPaginatedCar?current=${currentPage}&searchTerm=${searchTerm}&userPage=${userPage}`,{
             method:"GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -58,16 +60,7 @@ export const actionCreators = {
     searchChangeAction: (value:string)=>{
          return {type:"HOME/SEARCHCHANGE",payload:value}
     },
-    searchCarAction: async (searchChange:string) :Promise<SearchCarsAction> =>{
-        let response=await fetch(`https://localhost:7220/Car/SearchCar?search=${searchChange}`,{
-            method:"GET",
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body:null});
-        const carReponse:Car[]=await response.json() as Car[];
-        return {type:"HOME/SEARCHCARS", payload:carReponse}
-    },
+    
     initCarUserIdAction: async ():Promise<InitCarByUserIdAction>=>{
         const token=localStorage.getItem('token');
         let response=await fetch("https://localhost:7220/Car/GetCarByUserId",{
@@ -115,6 +108,7 @@ export const reducer: Reducer<HomeState> = (state: HomeState | undefined, incomi
              console.log(state.btnSearch)
                console.log(state.searchChange.length)
             }
+            console.log("AAAAA")
             return {...state,searchChange:action.payload}
         case 'HOME/SEARCHCARS':
             const searchState=JSON.parse(JSON.stringify(state))
