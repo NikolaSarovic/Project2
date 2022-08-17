@@ -124,14 +124,14 @@ namespace OnlineCarsStore.Repository
             return res;
         }
 
-        public async Task<IEnumerable<CarDto>> SearchCar(string search)
+        public async Task<PaginatedDataDto<CarDto>> SearchCar(string search, int currentPage)
         {
             var result = await this.GetAllCars();
             if (!string.IsNullOrEmpty(search))
                 result = result.Where(x => 
                 x.ModelCar.ToLower().Contains(search.ToLower()) 
                 || x.BrandCar.ToLower().Contains(search.ToLower()));
-            return result;
+            return PaginatedList<CarDto>.ApplyPagination(result.AsQueryable(), currentPage, 5);
         }
 
         public async Task<PaginatedDataDto<CarDto>> GetPaginatedList(int currentPage)
