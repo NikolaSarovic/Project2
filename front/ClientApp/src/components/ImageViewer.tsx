@@ -8,6 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import * as ImageStore from '../store/ImageStore';
 import { ApplicationState } from '../store/index';
 import { useSelector,useDispatch } from 'react-redux';
+import { padding } from '@mui/system';
 
 
 
@@ -56,20 +57,23 @@ function ImageViewer(props:Props ) {
             }}}
         >
           <DialogTitle>
-            Modal title
+            Images 
           </DialogTitle>
           <DialogContent dividers>
             <div className='imageViewer'>
                 <img src={props.imageUrls[currentImage]} />
-                <span>{`${currentImage+1} / ${props.imageUrls.length}`}</span>
+                <div>
+                <span style={{marginLeft:'8px'}}>{`${currentImage+1} / ${props.imageUrls.length}`}</span>
+                <div>
                 <button onClick={() => changeImage(ChangeDirection.prev)}>{"<"}</button>
                 <button onClick={() => changeImage(ChangeDirection.next)}>{">"}</button>
-               
+                </div>
+                </div>      
             </div>
           </DialogContent>
           <DialogActions>
             <Button autoFocus onClick={handleClose}>
-              Save changes
+              Close
             </Button>
           </DialogActions>
         </Dialog>

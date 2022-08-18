@@ -8,6 +8,7 @@ import * as LoginStore from '../store/Login';
 import * as homeStore from '../store/homeStore';
 import './styles/navMenu.css';
 import HeaderMenu from './HeaderMenu';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 function NavMenu() {
@@ -47,11 +48,11 @@ function NavMenu() {
             </div>
             <div >
             <TextField label="Search" margin="dense"  variant="outlined" type='text' value={stateSearch!.searchChange} onChange={e => onSearchChange(e.target as HTMLInputElement)}></TextField>
-            <Button variant="contained"  disabled={stateSearch!.btnSearch}  onClick={(e:any) => onSubmit()} >Search</Button>
+            <Button variant="contained" startIcon={<SearchIcon></SearchIcon>} style={{marginTop:'10px',background:'white'}}  disabled={stateSearch!.btnSearch}  onClick={(e:any) => onSubmit()} ></Button>
             </div>
             <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
+                <Link to="/login" style={{marginRight:"10px"}}>LOGIN</Link>
+                <Link to="/register" style={{marginRight:"10px"}}>REGISTER</Link>
             </div>
             <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
                  <HeaderMenu/>

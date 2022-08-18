@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@mui/material/MenuItem';
 import { Button, Grid, TextField, Typography,Alert } from '@mui/material';
 import SendSharpIcon from '@mui/icons-material/SendSharp';
+import './styles/create.css';
 
 function CreateCar() {
     const dispatch = useDispatch()
@@ -35,8 +36,8 @@ function CreateCar() {
      dispatch(CreateCarStore.actionCreators.addCar());
   }
   return (
-    <div>
-          <Typography variant="h3" align="center" color={"#5daeff"}>Change password</Typography>
+    <div className='createCss'>
+          <Typography variant="h3" align="center" color={"#5daeff"}>Create new car</Typography>
           <TextField
            autoFocus
           id="outlined-select-currency-native"
@@ -72,7 +73,7 @@ function CreateCar() {
             autoFocus
             margin="dense"
             name="numberDors"
-            label="Number dors"
+            label="Year"
             type="number"
             fullWidth
             onChange={handleTextCnage}

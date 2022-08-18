@@ -87,14 +87,15 @@ function CarView(props:Props) {
       <ImageViewer imageUrls={props.car.urlImage}></ImageViewer>
       <div>
         <h6>{props.car.brandCar + " " + props.car.modelCar}</h6>
-        <p>{props.car.numberDors}</p>
-        <p>{props.car.price + "KM"}</p>   
-        <p>{props.car.color}</p>
-        <p>{props.car.state}</p>
-        <p>{props.car.description}</p>      
+        <p>Godiste:{props.car.numberDors}</p>
+        <p>Cijena:{props.car.price + "KM"}</p>   
+        <p>Boja:{props.car.color}</p>
+        <p>Stanje:{props.car.state}</p>
+        <p>Dodatni opis:{props.car.description}</p>      
         <div>
-          <h6>{"By:" + props.car.nameUser}</h6>
-          <p>{"Contact:" + props.car.emailUser + props.car.numberUser}</p>
+          <h6>{"Contact by:" + props.car.nameUser}</h6>
+          <p>{"Email:" + props.car.emailUser}</p>
+          <p>{" Number:" + props.car.numberUser}</p> 
           </div>
           {  props.pom &&
              ( <div> 

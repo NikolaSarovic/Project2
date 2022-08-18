@@ -42,7 +42,7 @@ function Register() {
         <TextField label="Username" margin="dense"  onChange={e=>onInputUsernmaChange(e.target as HTMLInputElement)}></TextField>
         <TextField label="Email" margin="dense"   onChange={e=>onInputEmailChange(e.target as HTMLInputElement)}></TextField>
         <TextField label="Password" margin="dense" type='password' onChange={e=>onInputPasswordChange(e.target as HTMLInputElement)} ></TextField>
-        <Button  onClick={()=>onSubmit()}>Registration</Button>
+        <Button variant="contained"  onClick={()=>onSubmit()}>Registration</Button>
         </div>
         </div>
     )
