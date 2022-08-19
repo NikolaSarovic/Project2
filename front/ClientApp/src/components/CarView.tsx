@@ -100,7 +100,7 @@ function CarView(props:Props) {
           {  props.pom &&
              ( <div> 
                  <div>
-                      <Button variant="contained" onClick={handleBtn1}>DELETE</Button>
+                      <Button variant="contained" style={{marginRight:'40px', background:'red'}} onClick={handleBtn1}>DELETE</Button>
                       <Button variant="contained" onClick={()=>handleBtn2(props.car)}>UPDATE</Button>
                  </div>
                  <div>

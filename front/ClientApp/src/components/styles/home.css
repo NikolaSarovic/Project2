@@ -14,9 +14,15 @@
     display: flex;
     flex-direction: column;
 }
+.carView{
+    background-color: #dbe2f9;
+    height:100%;
+}
 .carView > img{
     width:160px;
     height:160px;
+    background-color: #dbe2f9;
+
 }
 .imageViewer > img{
     width:550px;
@@ -27,7 +33,7 @@
     border:none;
     width:300px;
     height:300px;
-    background-color: transparent;
+    background-color: #dbe2f9;
 }
 .imageBtn > img {
     width:280px;

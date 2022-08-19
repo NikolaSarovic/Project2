@@ -2,6 +2,8 @@
 
 .logo > img{
     display:inline-block;
+    width: 80px;
+    height:80px;
 }
 .logo > h6{
     display:inline-block;

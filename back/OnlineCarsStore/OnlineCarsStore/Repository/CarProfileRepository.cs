@@ -143,7 +143,7 @@ namespace OnlineCarsStore.Repository
                 .Include(x => x.ModelCar)
                 .Include(x => x.User)
                 .Select(x => new CarDto(x))
-                .AsQueryable(), currentPage, 5);
+                .AsQueryable(), currentPage, 6);
 
         }
     }

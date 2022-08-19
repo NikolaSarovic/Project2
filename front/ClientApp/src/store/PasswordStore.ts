@@ -67,12 +67,12 @@ export const actionCreators={
             if(response.ok)
             {
             console.log("okk")
-            dispatch({type:"PASSWORD/UPDATE",payload:{succes:true,faild:false}});
+            dispatch({type:"PASSWORD/UPDATE",payload:{success:true,faild:false}});
             }
             else
             {
                 console.log("bad")
-                dispatch({type:"PASSWORD/UPDATE",payload:{succes:false,faild:true}});
+                dispatch({type:"PASSWORD/UPDATE",payload:{success:false,faild:true}});
             }
             
     },

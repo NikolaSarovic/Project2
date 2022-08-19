@@ -48,7 +48,11 @@ export default function ChangePassword () {
            <Grid lg={12} item>
               <Typography variant="h3" align="center" color={"#5daeff"}>Change password</Typography>
            </Grid>
-               <div style={{display:data!.submit!.success!? "block":"none", marginBottom:"10px"}}>
+            <div style={{display:data!.submit!.success!? "block":"none", marginBottom:"10px"}}>
+              {console.log("-------------------------")}
+                {console.log(data!.submit.success)}
+                {console.log("-------------------------")}
+
                 <Alert severity="success">You have successfully change password!</Alert>
             </div>
             <div style={{display:data!.submit!.faild!? "block":"none",marginBottom:"10px"}}>

@@ -5,6 +5,7 @@ import { ApplicationState } from '../store';
 import { Car } from '../store/Interfaces/HomeInterfaces';
 import CarView from './CarView';
 import Pagination from '@mui/material/Pagination';
+import { Grid } from '@material-ui/core';
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -25,12 +26,18 @@ const Home = () => {
   },[])
   return (
     <div>
+      <Grid container spacing={2} >
       {state && state.cars && state.cars.map((item:Car) => {
-                       return( <CarView car={item}></CarView>);
+                       return(<Grid item md={6} sm={12}> <CarView car={item}></CarView> </Grid>);
       })} 
+      <Grid item md={12} sm={12}>
+      <Pagination style={{margin:"25px", justifyContent:"center", display:'flex'}} onChange={change} count={state!.numberOfPages} defaultPage={1}  boundaryCount={1} />
+
+      </Grid>
+      </Grid>
+      
 
 
-      <Pagination style={{margin:"auto auto 50px auto"}} onChange={change} count={state!.numberOfPages} defaultPage={1}  boundaryCount={1} />
             </div>)
       };
 
