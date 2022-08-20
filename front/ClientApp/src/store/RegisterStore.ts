@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-
+import { Dispatch } from "react";
 
 export interface RegisterState
 {
@@ -8,6 +8,7 @@ export interface RegisterState
     password:string,
     success:boolean,
     error:boolean,
+    errorForm:ErrorState
 
 }
 const initialState:RegisterState=
@@ -17,7 +18,17 @@ const initialState:RegisterState=
     password:"",
     success:false,
     error:false,
+    errorForm:{
+        usernameError: false,
+        emailError: false,
+        passwordError:false
+    }
 
+}
+export interface ErrorState {
+    usernameError: boolean,
+    emailError: boolean,
+    passwordError: boolean
 }
 interface RegisterData
 {
@@ -39,8 +50,9 @@ export interface ChangeUsername {type:'REGISTER/CHANGUSERNAME', payload:string}
 export interface ChangeEmail {type:'REGISTER/CHANGEMAIL',payload:string}
 export interface ChangePassword {type:'REGISTER/CHANGEPASSWORD',payload:string}
 export interface RegisterAction {type:'REGISTER/REGISTER',payload:RegisterActionPayload}
+export interface ErrorChangeAction {type:"REGISTER/ERROR",payload:ErrorState}
 
-export type KnownAction = ChangeUsername | ChangeEmail| ChangePassword | RegisterAction
+export type KnownAction = ChangeUsername | ChangeEmail| ChangePassword | RegisterAction | ErrorChangeAction
 
 export const actionCreators={
     changeUsernameValue:(value:string)=>{
@@ -73,7 +85,12 @@ export const actionCreators={
         else
           return {type:'REGISTER/REGISTER',payload:{status:ResponseStatus.Error}}
         
-    }
+    },
+    errorChangeAction:(name:string,value:boolean)=>(dispatch:Dispatch<any>,getState:Function)=>{
+        let errorState=JSON.parse(JSON.stringify(getState().register.errorForm))
+       errorState[name]=value;
+        dispatch({type:"REGISTER/ERROR",payload:errorState})
+  }
 }
 
 export const reducer:Reducer<RegisterState> =(state:RegisterState |undefined ,incomingAction:Action):RegisterState=>{
@@ -87,6 +104,7 @@ export const reducer:Reducer<RegisterState> =(state:RegisterState |undefined ,in
         case 'REGISTER/CHANGUSERNAME':
             return {...state,username:action.payload}
         case 'REGISTER/CHANGEMAIL':
+            console.log(action.payload)
             return {...state,email:action.payload}
         case 'REGISTER/CHANGEPASSWORD':
             return {...state,password:action.payload}
@@ -95,6 +113,8 @@ export const reducer:Reducer<RegisterState> =(state:RegisterState |undefined ,in
             return {...state,success:true,error:false}
             else(ResponseStatus.Error==action.payload.status)
             return {...state,success:false,error:true}
+        case 'REGISTER/ERROR':
+            return {...state,errorForm:action.payload}
           
         default:
            return state;

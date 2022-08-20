@@ -11,7 +11,12 @@ export interface LoginState {
     error:boolean,
     loggedUser:User | null,
     confirmUser:User | null
-    buttonOpen:boolean
+    buttonOpen:boolean,
+    errorForm:ErrorState
+}
+export interface ErrorState {
+    userError:boolean,
+    passError:boolean
 }
 
 
@@ -27,7 +32,11 @@ const initialState: LoginState = {
     success:false,
     loggedUser:null,
     buttonOpen:false,
-    confirmUser:null
+    confirmUser:null,
+    errorForm:{
+        userError:false,
+        passError:false
+    }
 }
 interface LoginActionPayload{
     status:ResponseStatus,
@@ -44,8 +53,9 @@ export interface InitUserAction { type: 'LOGIN/INITUSER', payload:User }
 export interface ChangeButtonOpen {type:'PROFILE/BUTTONOPEN',payload:boolean}
 export interface ValueChangeAction {type:'PROFILE/CHANGEVALUE',payload:User}
 export interface ConfirmForm {type:'PROFILE/CONFIRM', payload:LoginActionPayload}
+export interface ErrorChangeAction {type:"LOGIN/ERROR",payload:ErrorState}
 
-export type KnownAction = ChangeUsername | ChangePassword | LoginAction | InitUserAction |ChangeButtonOpen |ValueChangeAction |ConfirmForm;
+export type KnownAction = ChangeUsername | ChangePassword | LoginAction | InitUserAction |ChangeButtonOpen |ValueChangeAction |ConfirmForm | ErrorChangeAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -138,6 +148,11 @@ export const actionCreators = {
             console.log("bad")
             dispatch({type:"PROFILE/CONFIRM", payload:{status:ResponseStatus.Error, user:bod}})
             }
+    },
+    errorChangeAction:(name:string,value:boolean)=>(dispatch:Dispatch<any>,getState:Function)=>{
+        let errorState=JSON.parse(JSON.stringify(getState().login.errorForm))
+       errorState[name]=value;
+        dispatch({type:"LOGIN/ERROR",payload:errorState})
     }
 };
 
@@ -178,6 +193,8 @@ export const reducer: Reducer<LoginState> = (state: LoginState | undefined, inco
             return {...state, success:true, error:false, loggedUser :action.payload.user!}
         else(action.payload.status == ResponseStatus.Error)
             return {...state, error:true, success:false}
+        case 'LOGIN/ERROR':
+            return {...state,errorForm:action.payload};
         default:
             return state;
     }

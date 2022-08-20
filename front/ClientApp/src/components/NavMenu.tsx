@@ -52,9 +52,9 @@ function NavMenu() {
             </div>
             <div style={{display:(state!.loggedUser == null ? "block" : "none")}}>
                 <Link to="/login" style={{marginRight:"10px"}}>LOGIN</Link>
-                <Link to="/register" style={{marginRight:"10px"}}>REGISTER</Link>
+                <Link to="/register" style={{marginRight:"10px"}}>REGISTRATION</Link>
             </div>
-            <div style={{display:state!.loggedUser == null ? "none" : "block"}}>
+            <div style={{display:state!.loggedUser == null ? "none" : "block",marginRight:"10px"}}>
                  <HeaderMenu/>
                 
                

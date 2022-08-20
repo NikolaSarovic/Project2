@@ -8,7 +8,8 @@ export interface CreateCarStore {
     checkModelId:string,
     imageFile: any[],
     checkCarForm:CarForm ,
-    response:Response
+    response:Response,
+    error:ErrorState
 }
 const intialCreateCarStore:CreateCarStore={
    brandModel:[],
@@ -24,7 +25,16 @@ const intialCreateCarStore:CreateCarStore={
    response: {
     success:false,
     faild:false
- }
+ },
+  error:{
+    brandModel:false,
+    color: false,
+    year: false,
+    description:false,
+    number:false,
+    state:false,
+    image:false
+    } 
 }
 interface Response{
     success:boolean,
@@ -37,20 +47,30 @@ export interface CarForm {
     price:number,
     state:string 
 }
+export interface ErrorState {
+    brandModel: boolean,
+    color: boolean,
+    year: boolean,
+    description:boolean,
+    number:boolean,
+    state:boolean,
+    image:boolean
+}
 interface FileChangePayload {
     name: string;
     value: any;
 }
 
+export interface AddCarAction {type:"CREATE/ADD",payload:Response}
 export interface InitBrandModelAction {type:"CREATE/BRANDMODEL",payload:BrandModel[]};
 export interface CheckModelIdAction {type:"CREATE/CHECKMODELID",payload:string};
 export interface ValueFormAction {type:"CREATE/VALUEFORM",payload:CarForm};
 export interface ChangeImageAction {type:"CREATE/CHANGEIMAGE",payload:FileChangePayload[]};
 export interface DeleteCarByIdACtion  {type:'CREATE/DELETECARBYID',payload:Response};
 export interface UpdateCarAction {type:"CREATE/UPDATECAR",payload:Response};
+export interface ErrorChangeAction {type:"CREATE/ERROR",payload:ErrorState}
 
-
-export type KnownAction=InitBrandModelAction | CheckModelIdAction | ValueFormAction | ChangeImageAction | DeleteCarByIdACtion | UpdateCarAction;
+export type KnownAction=InitBrandModelAction | CheckModelIdAction | ValueFormAction | ChangeImageAction | DeleteCarByIdACtion | UpdateCarAction | AddCarAction |ErrorChangeAction;
 
 export const actionCreators={
     initBrandModelAction:()=> async (dispatch:Dispatch<any>,getState:Function)=>{
@@ -85,19 +105,19 @@ export const actionCreators={
         dispatch({type:"CREATE/CHANGEIMAGE",payload:{name:name,value:value}})
    },
     addCar:()=> async (dispatch:Dispatch<any>,getState:Function)=>{
-        const token=localStorage.getItem('token');
+        const errorImg=JSON.parse(JSON.stringify(getState().car.error.image))
+         const token=localStorage.getItem('token');
         let stateModelId=JSON.parse(JSON.stringify(getState().car.checkModelId))
       let stateForm:CarForm=JSON.parse(JSON.stringify(getState().car.checkCarForm))
-     // let stateImage=JSON.parse(JSON.stringify(getState().car.imageFile.value))
      let stateImage=getState().car.imageFile.value;
-     console.log(stateImage)
-      var data = new FormData()
+       var data = new FormData()
+       if(errorImg==true)
+       dispatch({type:"CREATE/ADD",payload:{ success:false, faild:true}})
+       
+       else {
       for(let i =0; i<stateImage.length;i++){
         data.append("file",stateImage[i])
-      }
-    
-   
-     
+      }   
       let response=await fetch(`https://localhost:7220/Car/CreateCar?modelId=${stateModelId}&color=${stateForm.color}&numberDors=${stateForm.numberDors}&description=${stateForm.description}&price=${stateForm.price}&state=${stateForm.state}`,{
         method: "POST",
         headers: {
@@ -106,7 +126,16 @@ export const actionCreators={
        },
        body:data
    })
-   console.log(response)
+   if(response.ok)
+   {
+         console.log("okadd")
+              dispatch({type:"CREATE/ADD",payload:{ success:true, faild:false}})
+   }
+   else
+   {
+              dispatch({type:"CREATE/ADD",payload:{ success:false, faild:true}})
+   }
+      }
     
    },
     deleteCarByIdACtion:(value:number)=>async (dispatch:Dispatch<any>,getState:Function)=>{
@@ -160,7 +189,12 @@ export const actionCreators={
     else
     console.log("baDD")
    
-  }
+  },
+  errorChangeAction:(name:string,value:boolean)=>(dispatch:Dispatch<any>,getState:Function)=>{
+    let errorState=JSON.parse(JSON.stringify(getState().car.error))
+   errorState[name]=value;
+    dispatch({type:"CREATE/ERROR",payload:errorState})
+}
 
 }
 
@@ -186,6 +220,10 @@ export const reducer:Reducer<CreateCarStore>=(state: CreateCarStore|undefined, i
                 return {...state,response:action.payload}
         case 'CREATE/UPDATECAR':
             return {...state,response:action.payload}
+        case "CREATE/ADD":
+            return {...state,response:action.payload}
+        case "CREATE/ERROR":
+            return {...state,error:action.payload};
 
         default:
         return state;

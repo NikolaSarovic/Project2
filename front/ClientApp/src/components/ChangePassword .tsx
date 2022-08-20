@@ -15,7 +15,6 @@ export default function ChangePassword () {
   
  
   const submitForm = () => {
-    console.log("souu")
     const validPassword = new RegExp(
       '(.*[A-Z].*)([/./*_@-]+)(.*)'
   );
@@ -49,14 +48,12 @@ export default function ChangePassword () {
               <Typography variant="h3" align="center" color={"#5daeff"}>Change password</Typography>
            </Grid>
             <div style={{display:data!.submit!.success!? "block":"none", marginBottom:"10px"}}>
-              {console.log("-------------------------")}
-                {console.log(data!.submit.success)}
-                {console.log("-------------------------")}
+  
 
                 <Alert severity="success">You have successfully change password!</Alert>
             </div>
             <div style={{display:data!.submit!.faild!? "block":"none",marginBottom:"10px"}}>
-                <Alert severity="error">Error</Alert>
+                <Alert severity="error">The action failed</Alert>
             </div>
            <Grid item lg={12}>
                      <div style={{display:data!.error!.currentPassword?"block":"none",color: 'red'}}>

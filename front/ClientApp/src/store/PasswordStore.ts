@@ -52,6 +52,15 @@ export const actionCreators={
       const oldPassword=getState().password.oldPassword;
       const newPassword=getState().password.newPassword;
       const token=localStorage.getItem('token');
+      const newpassword=getState().password.error.newPassword;
+      const currentPassword=getState().password.error.currentPassword;
+      const passwordMatch=getState().password.error.passwordMatch;
+      if(newpassword==true || currentPassword==true || passwordMatch==true)
+      {
+        dispatch({type:"PASSWORD/UPDATE",payload:{success:false,faild:true}});
+      }
+      else {
+      
       let response=await fetch("https://localhost:7220/UserProfile",{
              method: "POST",
              headers: {
@@ -74,13 +83,12 @@ export const actionCreators={
                 console.log("bad")
                 dispatch({type:"PASSWORD/UPDATE",payload:{success:false,faild:true}});
             }
-            
+        
+        }   
     },
     errorChangeAction:(name:string,value:boolean)=>(dispatch:Dispatch<any>,getState:Function)=>{
           let errorState=JSON.parse(JSON.stringify(getState().password.error))
          errorState[name]=value;
-         console.log(errorState[name])
-         console.log(errorState)
           dispatch({type:"PASSWORD/ERROR",payload:errorState})
     }
 }
