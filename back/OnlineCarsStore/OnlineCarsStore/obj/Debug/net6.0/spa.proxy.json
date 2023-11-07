@@ -2,7 +2,7 @@
 "SpaProxyServer": {
 "ServerUrl": "",
 "LaunchCommand": "",
-"WorkingDirectory": "C:\\Users\\Nikola\\Desktop\\Diplomski\\Projekat2\\back\\OnlineCarsStore\\OnlineCarsStore",
+"WorkingDirectory": "D:\\Nikolaaa\\ETF materijali\\Diplomski asp.net i react\\Projekat2\\back\\OnlineCarsStore\\OnlineCarsStore",
 "MaxTimeoutInSeconds": "120"
 }
 }

@@ -57,7 +57,7 @@ function Register() {
                 <Alert severity="error">The action failed</Alert>
             </div>
             <div style={{display:state!.success!?"block":"none", marginBottom:"10px"}}>
-                <Alert severity="success">You have successfully logged in!</Alert>
+                <Alert severity="success">You have successfully registered!</Alert>
             </div>
         <div>
         <div style={{display:state!.errorForm!.usernameError?"block":"none",color: 'red'}}>

@@ -5,20 +5,21 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OnlineCarsStore
 build_property.RootNamespace = OnlineCarsStore
-build_property.ProjectDir = C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore\
+build_property.ProjectDir = D:\Nikolaaa\ETF materijali\Diplomski asp.net i react\Projekat2\back\OnlineCarsStore\OnlineCarsStore\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Nikola\Desktop\Diplomski\Projekat2\back\OnlineCarsStore\OnlineCarsStore
+build_property.MSBuildProjectDirectory = D:\Nikolaaa\ETF materijali\Diplomski asp.net i react\Projekat2\back\OnlineCarsStore\OnlineCarsStore
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Nikola/Desktop/Diplomski/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/Error.cshtml]
+[D:/Nikolaaa/ETF materijali/Diplomski asp.net i react/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nikola/Desktop/Diplomski/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/_ViewImports.cshtml]
+[D:/Nikolaaa/ETF materijali/Diplomski asp.net i react/Projekat2/back/OnlineCarsStore/OnlineCarsStore/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

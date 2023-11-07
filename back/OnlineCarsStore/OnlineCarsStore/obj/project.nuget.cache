@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3WiA1KkWs1EuRg9JMUYnzEwjTFC/2UGflk7qcqGp4M4kF8rnM7hv7R+8gFbyuQkXV276JpyUdsTxceb/vaRtkw==",
+  "dgSpecHash": "AannQ4HSBzEYg14POguCBLVxGiLUqwYgTxaw7Fz4QoL5wLDkqIHc+mpZVzh+IhlqvB6obUYbMhLta2FWATHF/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\Diplomski\\Projekat2\\back\\OnlineCarsStore\\OnlineCarsStore\\OnlineCarsStore.csproj",
+  "projectFilePath": "D:\\Nikolaaa\\ETF materijali\\Diplomski asp.net i react\\Projekat2\\back\\OnlineCarsStore\\OnlineCarsStore\\OnlineCarsStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\azure.storage.blobs\\12.13.0\\azure.storage.blobs.12.13.0.nupkg.sha512",
